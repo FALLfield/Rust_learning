@@ -8,6 +8,13 @@ fn close(f: &mut File) -> bool {
     true
 }
 
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+
 #[allow(dead_code)]
 fn read(f: &mut File, save_to: &mut Vec<u8>) -> ! {
     unimplemented!()//unimplemented!() 标记通常意味着我们期望快速完成主要代码，回头再通过搜索这些标记来完成次要代码
@@ -63,6 +70,27 @@ fn main() {
     //Tuple
 
     let tup: (i32,f64,u8) = (500,6.4,1);
+    let index = tup.0;//Use "." to access tuple element
+
+
+    //Struct
+    let user1 = User{
+        email:String::from("example"),
+        username:String::from("aa"),
+        active: true,
+        sign_in_count:1,
+    };
+
+    let user2 = User{
+        email: String::from("another"),
+        ..user1
+    };//Get left parts from user1 and only modify the email
+
+
 
 }
+fn calculate_length(s: String) -> (String,usize){
+    let length = s.len();
+    (s, length)
+}//Use tuple return two values
 
