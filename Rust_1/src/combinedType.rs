@@ -14,7 +14,24 @@ struct User {
     email: String,
     sign_in_count: u64,
 }
+#[derive(Debug)]
+struct Rectangle {
+    width: i32,
+    height: i32,
+}
+#[derive(Debug)]
+enum PokerSuit{
+    Clubs(u8),
+    Spades(u8),//We can point the value type of enum
+    Diamonds,
+    Hearts,
+}
 
+#[derive(Debug)]
+struct PokerCard{
+    suit: PokerSuit,
+    value: u8,
+}
 #[allow(dead_code)]
 fn read(f: &mut File, save_to: &mut Vec<u8>) -> ! {
     unimplemented!()//unimplemented!() 标记通常意味着我们期望快速完成主要代码，回头再通过搜索这些标记来完成次要代码
@@ -35,8 +52,8 @@ fn main() {
     let zhongwenslice = &[0..2];//这样写是错误的，因为每个中文占了三个字节
 
     let s1 = s.push_str("a");//追加
-    let s2 = s.insert(5,"a");//插入字符
-    let s3 = s.replace("Hello","hhhh");//replace
+    let s2 = s.insert(5, "a");//插入字符
+    let s3 = s.replace("Hello", "hhhh");//replace
     let c1 = s.pop();//Delete the last character and return it
     let c2 = s.remove(3);//Delete the specified index value and return it
 
@@ -69,25 +86,61 @@ fn main() {
 
     //Tuple
 
-    let tup: (i32,f64,u8) = (500,6.4,1);
+    let tup: (i32, f64, u8) = (500, 6.4, 1);
     let index = tup.0;//Use "." to access tuple element
 
 
     //Struct
-    let user1 = User{
-        email:String::from("example"),
-        username:String::from("aa"),
+    let user1 = User {
+        email: String::from("example"),
+        username: String::from("aa"),
         active: true,
-        sign_in_count:1,
+        sign_in_count: 1,
     };
 
-    let user2 = User{
+    let user2 = User {
         email: String::from("another"),
         ..user1
     };//Get left parts from user1 and only modify the email
+    //这是结构图更新语法，部分值的所有权会转移到user2身上
+
+    //Tuple struct
+    struct Color(i32, i32, i32);
+    let black = Color(0, 0, 0);
+
+    //Derive display struct
+    let ret1 = Rectangle {
+    width: 30,
+    height: 50,
+    };
+    println!("ret1 is {:?}", ret1);
+    dbg!(&ret1);//The dbg! will take the ownership of ret1 and return it finally
 
 
 
+    // Enumerate
+    let heart = PokerSuit::Hearts;
+    print_suit(heart);
+
+    let c1 = PokerCard{
+        suit: PokerSuit::Clubs,
+        value: 1,
+    };
+
+    let c2 = PokerSuit::Spades(5);
+
+    let some_number = Some(5);
+    let some_string = Some("A string");
+
+    let absent_number: Option<i32> = None;// If we use None, we need Rust what type the Option<T> is
+
+
+
+
+}
+
+fn print_suit(card: PokerSuit){
+    println!("{:?}", card);
 }
 fn calculate_length(s: String) -> (String,usize){
     let length = s.len();
