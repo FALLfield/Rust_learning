@@ -134,6 +134,12 @@ fn main() {
 
     let absent_number: Option<i32> = None;// If we use None, we need Rust what type the Option<T> is
 
+    //Array
+    let a = [1,2,3,4,5];//Allocate an static array
+    let a = [3; 5];//Allocate an array that has 5 3s
+    let first = a[0];//Access a's index 0
+    let array: [String; 8] = std::array::from_fn(|_i| String::from("Rust is good! "));//Use this statement to allocate an array that String repeat 8 times
+
 
 
 
