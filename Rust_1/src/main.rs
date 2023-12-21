@@ -1,0 +1,3 @@
+mod Generics;
+
+fn main() {}
